@@ -105,7 +105,23 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <div>Rotate device to switch tools</div>
+        <a
+          className="footer-link left"
+          href="https://github.com/amolgadge663/TechGig-AI-Prompt-Hackathon/blob/main/README.md"
+          target="_blank"
+          rel="noopener noreferrer" >
+          README </a>
+
+        <div className="footer-center">Rotate device to switch tools</div>
+
+        <a
+          className="footer-link right"
+          href="https://amolsoftwares.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Website </a>
+
       </footer>
     </div>
   );

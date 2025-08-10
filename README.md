@@ -2,6 +2,9 @@
 It includes project overview, features, tech stack, setup, deployment, permissions, testing, and creator profile/links.
 ---
 
+# App link (GitHub Pages)
+- https://amolgadge663.github.io/TechGig-AI-Prompt-Hackathon/
+
 # Orientation Tools (React + Vite)
 Mobile-first, one-page web app that switches features based on how you hold your phone:
 - Portrait Upright → Alarm Clock
