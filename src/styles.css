@@ -8,7 +8,7 @@
   --border: #1f2937;
 }
 
-* {
+  {
   box-sizing: border-box;
 }
 
@@ -86,7 +86,6 @@ body {
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-  transition: transform 180ms ease, opacity 180ms ease;
 }
 
 .panel-header {
@@ -195,10 +194,9 @@ body {
   font-size: 13px;
 }
 
-
-/* Keep the center message centered while placing links on edges /
+/* Keep the center message centered while placing links on edges */
 .footer-center {
-pointer-events: none; / so clicks pass to links if overlapping on tiny screens */
+  pointer-events: none;
 }
 
 /* Edge links */
@@ -214,18 +212,6 @@ pointer-events: none; / so clicks pass to links if overlapping on tiny screens *
   border: 1px solid transparent;
 }
 
-/* Respect upside‑down portrait flip (we counter-rotate footer in your earlier change) */
-.app.portrait_secondary .footer-link {
-  transform: rotate(180deg);
-}
-
-/* Small screens: avoid overlap with center text */
-@media (max-width: 360px) {
-  .footer-center {
-    display: none;
-  }
-}
-
 .footer-link.left {
   left: 12px;
 }
@@ -238,15 +224,9 @@ pointer-events: none; / so clicks pass to links if overlapping on tiny screens *
   border-color: var(--border);
 }
 
-/* Motion/Orientation-driven micro-animations */
+/* Orientation-driven micro-animations */
 .app.portrait_primary .panel {
   transform: translateY(0);
-  opacity: 1;
-}
-
-.app.portrait_secondary .panel {
-  transform: rotate(180deg);
-  transform-origin: center center;
   opacity: 1;
 }
 
@@ -260,18 +240,11 @@ pointer-events: none; / so clicks pass to links if overlapping on tiny screens *
   opacity: 1;
 }
 
-/* Smooth transform transitions for flipped state */
-.content,
-.topbar,
-.footer,
-.panel {
-  transition: transform 180ms ease;
-}
-
-/* Flip UI for portrait upside-down so it reads upright */
-.app.portrait_secondary .content {
+/* Flip ONLY the card (panel) when Portrait Upside Down */
+.app.portrait_secondary .panel {
   transform: rotate(180deg);
   transform-origin: center center;
+  opacity: 1;
 }
 
 /* Counter-rotate fixed bars so they remain readable */
@@ -280,17 +253,20 @@ pointer-events: none; / so clicks pass to links if overlapping on tiny screens *
   transform: rotate(180deg);
 }
 
-/* If your panel has its own transforms, rotate it as well to keep visual consistency */
-.app.portrait_secondary .panel {
+/* Keep footer edge links readable when flipped */
+.app.portrait_secondary .footer-link {
   transform: rotate(180deg);
 }
 
-/* Optional: keep smooth scrolling on iOS */
-.app.portrait_secondary .content {
-  -webkit-overflow-scrolling: touch;
+/* Smooth transitions for transformed elements */
+.content,
+.topbar,
+.footer,
+.panel {
+  transition: transform 180ms ease, opacity 180ms ease;
 }
 
-/* Optional: iOS safe-area polish when flipped (keeps notches/edges comfortable) */
+/* Optional: iOS safe-area polish when flipped */
 .app.portrait_secondary .topbar {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
@@ -310,4 +286,61 @@ input {
   .big {
     font-size: 64px;
   }
+}
+
+a {
+  color: whitesmoke;
+}
+
+a:focus {
+  color: #22c55e;
+}
+
+/* Base interaction states + ripple */
+.btn,
+.chip {
+  transition: transform 80ms ease, background-color 120ms ease, box-shadow 120ms ease;
+  touch-action: manipulation;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple element */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple 450ms ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(12);
+    opacity: 0;
+  }
+}
+
+/* Hover on capable devices only */
+@media (hover: hover) and (pointer: fine) {
+
+  .btn:hover,
+  .chip:hover {
+    filter: brightness(1.05);
+  }
+}
+
+/* Focus ring for accessibility */
+.btn:focus-visible,
+.chip:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.8);
+  outline-offset: 2px;
+}
+
+/* Pressed state (immediate feedback on tap) */
+.btn:active,
+.chip:active {
+  transform: scale(0.98);
+  filter: brightness(0.95);
 }
