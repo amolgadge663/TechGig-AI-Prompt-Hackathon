@@ -4,6 +4,7 @@
  * - Start/Stop with countdown and alert at 0.
  */
 import { useEffect, useRef, useState } from "react";
+import { primeAudio } from "../services/audio";
 
 function format(totalSec: number) {
   const h = Math.floor(totalSec / 3600);
@@ -35,7 +36,8 @@ export default function Timer() {
     };
   }, [running]);
 
-  const start = () => {
+  const start = async () => {
+    await primeAudio();
     setRemaining(seconds);
     setRunning(true);
   };

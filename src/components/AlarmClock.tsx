@@ -5,6 +5,7 @@
  * - Plays a tone and shows a toast alert on trigger.
  */
 import { useEffect, useRef, useState } from "react";
+import { primeAudio } from "../services/audio";
 
 const beepUrl =
   "data:audio/wav;base64,UklGRhQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYAZGF0YQAAAAA="; // tiny placeholder
@@ -40,7 +41,7 @@ export default function AlarmClock() {
       const hm = tick.slice(0, 5);
       if (hm === time) {
         setArmed(false);
-        audioRef.current?.play().catch(() => {});
+        audioRef.current?.play().catch(() => { });
         alert("Alarm!");
       }
     }, 1000);
@@ -60,7 +61,14 @@ export default function AlarmClock() {
         />
       </label>
       <div className="row">
-        <button className="btn" onClick={() => setArmed(true)} disabled={armed}>
+        <button
+          className="btn"
+          onClick={async () => {
+            await primeAudio(); // unlock audio on first user gesture
+            setArmed(true);
+          }}
+          disabled={armed}
+        >
           Arm
         </button>
         <button className="btn secondary" onClick={() => setArmed(false)}>
