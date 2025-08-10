@@ -216,12 +216,14 @@ pointer-events: none; / so clicks pass to links if overlapping on tiny screens *
 
 /* Respect upside‑down portrait flip (we counter-rotate footer in your earlier change) */
 .app.portrait_secondary .footer-link {
-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 /* Small screens: avoid overlap with center text */
 @media (max-width: 360px) {
-.footer-center { display: none; }
+  .footer-center {
+    display: none;
+  }
 }
 
 .footer-link.left {
@@ -243,7 +245,8 @@ transform: rotate(180deg);
 }
 
 .app.portrait_secondary .panel {
-  transform: rotate(0.5deg);
+  transform: rotate(180deg);
+  transform-origin: center center;
   opacity: 1;
 }
 
