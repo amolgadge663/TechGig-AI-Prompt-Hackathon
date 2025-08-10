@@ -70,7 +70,7 @@ export default function App() {
   return (
     <div className={`app ${kind.replace("-", "_")}`}>
       <header className="topbar">
-        <div className="title">Orientation Tools</div>
+        <div className="title">Orientation Tools <br /><a href="https://www.linkedin.com/in/amolgadge663" target="_blank">Mr. Amol Gadage</a></div>
         <div className="badge">{kind}</div>
       </header>
 
